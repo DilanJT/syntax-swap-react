@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
-import './App.css'
+// import './App.css'
+import 'bootstrap/dist/css/bootstrap.min.css';
 import Home from './pages/Home/home'
 import Header from './components/Header/header'
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
@@ -19,8 +20,7 @@ function App() {
     <div className="App">
 
     <Router>
-
-      <Header></Header>
+      <Header/>
       <Routes>
         <Route path="/home" Component={Home} />
         <Route path="/translator" Component={Translator} />
@@ -28,8 +28,7 @@ function App() {
         <Route path="/extractor" Component={Extractor} />
         <Route path="/about" Component={About} />
       </Routes>
-
-      <Footer></Footer>
+      <Footer/>
     </Router>
     </div>
   )
