@@ -22,6 +22,7 @@ function App() {
     <Router>
       <Header/>
       <Routes>
+        <Route path="/" Component={Translator}/>
         <Route path="/home" Component={Home} />
         <Route path="/translator" Component={Translator} />
         <Route path="/history" Component={History} />
