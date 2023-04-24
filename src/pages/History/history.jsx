@@ -1,15 +1,15 @@
 import React from 'react';
 
-const Home = () => {
+const History = () => {
   return (
     <div className="container my-5">
       <h1>Welcome to the SyntaxSwap Code Translator Tool</h1>
       <p>
-        Home page
+        History page
       </p>
       <button className="btn btn-primary">Get Started</button>
     </div>
   );
 };
 
-export default Home;
+export default History;
