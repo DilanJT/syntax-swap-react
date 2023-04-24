@@ -5,6 +5,8 @@ import './App.css'
 import Home from './pages/Home/home'
 import Header from './components/Header/header'
 import Footer from './components/Footer/footer'
+import CodeTranslatorTab from './components/CodeExtractorTab/codeextractortab'
+import HistoryTab from './components/HistoryTab/historytab'
 
 function App() {
   const [count, setCount] = useState(0)
