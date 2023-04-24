@@ -29,7 +29,7 @@ function App() {
         <Route path="/extractor" Component={Extractor} />
         <Route path="/about" Component={About} />
       </Routes>
-      <Footer/>
+      {/* <Footer/> */}
     </Router>
     </div>
   )
