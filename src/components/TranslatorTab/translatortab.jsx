@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+
 import Editor from "react-simple-code-editor";
 import { highlight, languages } from "prismjs/components/prism-core";
 import "prismjs/components/prism-clike";
@@ -6,7 +7,9 @@ import "prismjs/components/prism-java";
 import "prismjs/components/prism-javascript";
 import "prismjs/themes/prism.css"; //Example style, you can use another
 
+
 const CodeTranslatorTab = () => {
+
   const [javaCode, setJavaCode] = useState(
     `System.out.println("Hello World");`
   );
@@ -14,8 +17,9 @@ const CodeTranslatorTab = () => {
 
   const [jsData, setJsData] = useState({
     javascript_code: "",
-    string_labels: "",
+    string_labels: [],
   });
+
 
   const handleTranslate = async (e) => {
     // TODO: implement code translation logic
@@ -31,21 +35,38 @@ const CodeTranslatorTab = () => {
     });
     const data = await response.json();
     console.log(data);
+
+    var js = (data.javascript_code).toString()
+    console.log(typeof js)
+
+    try{
+        console.log(data.ast);
+        console.log("----------------------------")
+        console.log(data.formatted_jscode)
+        console.log(data.string_labels)
+    }catch(error) {
+        console.log(error)
+    }
     setJsData({
-      javascript_code: data.javascript_code,
+      javascript_code: data.formatted_jscode,
       string_labels: data.string_labels,
     });
   };
 
   const handleCompile = () => {
     // TODO: implement code compilation logic
-    alert("compilation triggered");
+    // TODO: For future work
+    console.log("compilation is triggered.")
   };
 
   const handleClear = () => {
     // TODO: implement code compilation logic
     setJavaCode("");
     setJsCode("");
+    setJsData({
+        javascript_code: "",
+        string_labels:[]
+    })
   };
 
   const styles = {
@@ -60,12 +81,6 @@ const CodeTranslatorTab = () => {
       <div className="row mt-3">
         <div className="col-12 col-md-5">
           <h3>Java Code</h3>
-          {/* <textarea
-                        className="form-control"
-                        rows="10"
-                        value={javaCode}
-                        onChange={(e) => setJavaCode(e.target.value)}
-                    ></textarea> */}
           <Editor
             value={javaCode}
             onValueChange={(javaCode) => setJavaCode(javaCode)}
@@ -76,9 +91,10 @@ const CodeTranslatorTab = () => {
               fontSize: 14,
               backgroundColor: "#f5f5f5",
               borderRadius: 5,
-              border: "1px solid #ccc",
               height: "300px",
+              overflow: "scroll"
             }}
+            
           />
         </div>
         <div className="col-12 col-md-2" style={styles.buttonsStyle}>
@@ -112,17 +128,27 @@ const CodeTranslatorTab = () => {
               fontSize: 14,
               backgroundColor: "#f5f5f5",
               borderRadius: 5,
-              border: "1px solid #ccc",
               height: "300px",
+              overflow: "scroll"
             }}
           />
-          {/* <textarea
-                        className="form-control"
-                        rows="10"
-                        value={jsCode}
-                        readOnly
-                    ></textarea> */}
         </div>
+      </div>
+
+      <div className="row mt-3">
+            <h4>String Literals</h4>
+            <div className="list-group">
+                {jsData.string_labels.map(function(name, index){
+                    return <a href="#" key={index} className="list-group-item list-group-item-action" data-clipboard-text="text">{name}</a>
+                })}
+            </div>
+      </div>
+
+      <div className="row mt-3">
+            <h4>Abstract Syntax Tree</h4>
+            <div>
+                
+            </div>
       </div>
     </div>
   );
